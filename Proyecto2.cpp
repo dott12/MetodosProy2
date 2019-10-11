@@ -26,10 +26,10 @@ do {
 				cout<<"SISTEMAS DE ECUACIONES ALGEBRAICAS LINEALES"<<endl;
 				cout<<"FACILITADOR: ING.JACQUELINE S. DE CHING"<<endl;
 				cout<<"\t\tINTEGRANTES:"<<endl;
-				cout<<"\t   EDGAR MARTIN 8-913-1957"<<endl;
-				cout<<"\t   IVES DE LA CRUZ 6-720-1526 					"<<endl;
-				cout<<"\t\t1IL-124"<<endl;
-				cout<<"\t\t20/10/19"<<endl;
+				cout<<"\t EDGAR MARTIN 8-913-1957"<<endl;
+				cout<<"\t IVES DE LA CRUZ 6-720-1526"<<endl;
+				cout<<"\t\t 1IL-124"<<endl;
+				cout<<"\t\t 20/10/19"<<endl;
 				system("pause");
 				system("cls");
 		break;
