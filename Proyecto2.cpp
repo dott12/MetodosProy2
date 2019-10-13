@@ -18,6 +18,7 @@ void printValuesIt();
 
 
 
+
 //****Variables Doolittle
 float aDL[3][4] =
 //arrayDooLittle
@@ -26,8 +27,19 @@ float aDL[3][4] =
 { 0, 0, 0, 0}, // row 1
 { 0, 0, 0, 0} // row 2
 };
+//MatrizTriangular
+float mT[3][4] =
+{
+{ 0, 0, 0, 0}, // row 0
+{ 0, 0, 0, 0}, // row 1
+{ 0, 0, 0, 0} // row 2
+};
 void insertValuesDL();
 void printValuesDL();
+void resolvDL();
+void printValuesInput();
+void testFill();
+void printmT();
 
 
 
@@ -117,10 +129,18 @@ int main() {
                                         }while(menu3!=3);
                                 break;
 
-        //******************Método Doolittle
+        //+++++++++++++++++++++++Método Doolittle++++++++++++++++++++++++++++++++
+
                                 case 2:
 
-                                    insertValuesDL(); //llama al método para insertar los valores de la matriz
+                                    //insertValuesDL(); //llama al método para insertar los valores de la matriz
+                                    //printValuesDL();
+                                    testFill();
+
+                                    printValuesInput();
+                                    resolvDL();
+                                    printmT();
+
 
                                         do{
 
@@ -183,59 +203,48 @@ int main() {
 //Acá se insertan los valores para la matriz de doolittle
 void insertValuesDL() {
 
-    system("cls");
+            system("cls");
 
-    float valor=0;
+            float valor=0;
 
-    cout << "\n\nInserte valores: \n";
+            cout << "\n\nInserte valores: \n";
 
 
-        for (int i=0;i<=2;i++){
-           std::cout << "(" << "Fila "<< i+1<< ")" << '\n';
+                for (int i=0;i<=2;i++){
+                   std::cout << "(" << "Fila "<< i+1<< ")" << '\n';
 
-        for (int j=0;j<=2;j++){
+                for (int j=0;j<=2;j++){
 
-                std::cout << "x" << j+1<< ": " ;
-            cin >> valor;
-            aDL[i][j] = valor;
-        }
-        std::cout << "  = " ;
-        cin >> valor;
-        aDL[i][3] = valor;
+                        std::cout << "x" << j+1<< ": " ;
+                    cin >> valor;
+                    aDL[i][j] = valor;
+                }
+                std::cout << "  = " ;
+                cin >> valor;
+                aDL[i][3] = valor;
 
-        cout <<"\n";
-    }
+                cout <<"\n";
+            }
 
-    printValuesDL();
+
 
 
 }
 
 void printValuesDL(){
 
-    float cont;
-    cout << "\nMatriz:\n";
-
-/*
-     for (int i=0;i<=2;i++){
-
-        for (int j=0;j<=3;j++){
-            std::cout << aDL[i][j]<< ", ";
-        }
-        cout <<"\n";
-    }*/
-
-    for (int i=0;i<=2;i++){
+            float cont;
+            cout << "\nSistema de ecuaciones:\n";
 
 
-    std::cout <<"("<< aDL[i][0]<< ")x1 + ("<< aDL[i][1]<< ")x2 + ("<< aDL[i][2]<< ")x3 = "<< aDL[i][3] ;
+            for (int i=0;i<=2;i++){
 
-        cout <<"\n";
-    }
+                    std::cout <<"("<< aDL[i][0]<< ")x1 + ("<< aDL[i][1]<< ")x2 + ("<< aDL[i][2]<< ")x3 = "<< aDL[i][3] ;
+                        cout <<"\n";
+            }
 
-
-    cout << "Presione cualquier tecla para continuar: \n";
-    cin >> cont;
+            cout << "Presione cualquier tecla para continuar: \n";
+            cin >> cont;
 
 }
 
@@ -268,3 +277,82 @@ void insertValuesIt(){
 void printValuesIt(){
 
 }
+
+void resolvDL(){
+
+    //Primera fila
+        mT[0][0]=aDL[0][0];
+        mT[0][1]=aDL[0][1];
+        mT[0][2]=aDL[0][2];
+        mT[0][3]=aDL[0][3];
+
+    //Segunda fila
+        mT[1][0]=aDL[1][0]/aDL[0][0];
+        mT[1][1]=aDL[1][1]-(mT[1][0]*aDL[0][1]);
+        mT[1][2]=aDL[1][2]-(mT[1][0]*aDL[0][2]);
+
+    //Segunda fila
+        mT[2][0]=aDL[2][0]/aDL[0][0];
+        mT[2][1]=(aDL[2][1]-mT[2][0]*mT[0][1])/mT[1][1];
+        mT[2][2]=aDL[2][2]-(mT[2][0]*mT[0][2])-(mT[2][1]*mT[1][2]);
+
+
+
+}
+
+void printmT(){
+
+     float cont;
+            cout << "\nMatriz ingresada:\n";
+
+
+            for (int i=0;i<=2;i++){
+
+                    std::cout <<"("<< mT[i][0]<< ", "<< mT[i][1]<< ", "<< mT[i][2]<< ") = ("<<mT[i][3]<<")" ;
+                        cout <<"\n";
+            }
+
+            cout << "Presione cualquier tecla para continuar: \n";
+            cin >> cont;
+}
+
+void printValuesInput(){
+
+            float cont;
+            cout << "\nMatriz ingresada:\n";
+
+
+            for (int i=0;i<=2;i++){
+
+                    std::cout <<"("<< aDL[i][0]<< ", "<< aDL[i][1]<< ", "<< aDL[i][2]<< ") = ("<<aDL[i][3]<<")" ;
+                        cout <<"\n";
+            }
+
+            cout << "Presione cualquier tecla para continuar: \n";
+            cin >> cont;
+}
+
+void testFill(){
+
+    //llena fila 1
+    aDL[0][0] = 2;
+    aDL[0][1] = 1;
+    aDL[0][2] = 3;
+    aDL[0][3] = 11;
+
+    //llena fila 2
+    aDL[1][0] = 4;
+    aDL[1][1] = 3;
+    aDL[1][2] = 10;
+    aDL[1][3] = 28;
+
+    //llena fila 3
+    aDL[2][0] = 2;
+    aDL[2][1] = 4;
+    aDL[2][2] = 17;
+    aDL[2][3] = 31;
+
+}
+
+
+
