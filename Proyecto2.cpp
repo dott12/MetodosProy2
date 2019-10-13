@@ -4,15 +4,27 @@
 using namespace std;
 
 
+//****Variables Iterativo
+float aIt[3][4] =
+//arrayDooLittle
+{
+{ 0, 0, 0, 0}, // row 0
+{ 0, 0, 0, 0}, // row 1
+{ 0, 0, 0, 0} // row 2
+};
+
+void insertValuesIt();
+void printValuesIt();
+
 
 
 //****Variables Doolittle
-int aDL[3][3] =
+float aDL[3][4] =
 //arrayDooLittle
 {
-{ 0, 0, 0,}, // row 0
-{ 0, 0, 0,}, // row 1
-{ 0, 0, 0} // row 2
+{ 0, 0, 0, 0}, // row 0
+{ 0, 0, 0, 0}, // row 1
+{ 0, 0, 0, 0} // row 2
 };
 void insertValuesDL();
 void printValuesDL();
@@ -65,20 +77,22 @@ int main() {
                             cout<<"1. Metodo Iteractivo "<<endl;
                             cout<<"2. Metodo Doollitle"<<endl;
                             cout<<"3.Regresar al Menu Principal"<<endl<<endl;
-                            cout<<"Eliga la opcion que desea:"<<endl;
+                            cout<<"Elija la opcion que desea:"<<endl;
                             cin>>menu2;
                             system("cls");
 
 
                                 switch(menu2){
                                 case 1:
+
+                                    insertValuesIt();
                                         do{
                                             system("cls");
                                             cout<<"\tMETODO ITERATIVO"<<endl<<endl;
                                             cout<<"1. Tabla o cuadro de iteraciones"<<endl;
                                             cout<<"2. Resultado del Sistema de Ecuaciones Algebraico lineal"<<endl;
                                             cout<<"3. Regresar al Menu anterior"<<endl<<endl;
-                                            cout<<"Eliga la opcion que desea:"<<endl;
+                                            cout<<"Elija la opcion que desea:"<<endl;
                                             cin>>menu3;
                                             system("cls");
 
@@ -106,7 +120,7 @@ int main() {
         //******************Método Doolittle
                                 case 2:
 
-                                    insertValuesDL();
+                                    insertValuesDL(); //llama al método para insertar los valores de la matriz
 
                                         do{
 
@@ -118,7 +132,7 @@ int main() {
                                             cout<<"3. Matriz Triangular Superior"<<endl;
                                             cout<<"4. Resultado del Sistema de Ecuaciones Algebraico Lineal"<<endl;
                                             cout<<"5. Regresar al Menu anterior"<<endl<<endl;
-                                            cout<<"Eliga la opcion que desea:"<<endl;
+                                            cout<<"Elija la opcion que desea:"<<endl;
                                             cin>>menu4;
                                             system("cls");
 
@@ -172,18 +186,23 @@ void insertValuesDL() {
     system("cls");
 
     float valor=0;
-    float valor1=0;
-    float valor2=0;
+
     cout << "\n\nInserte valores: \n";
 
 
-    for (int i=0;i<=2;i++){
+        for (int i=0;i<=2;i++){
            std::cout << "(" << "Fila "<< i+1<< ")" << '\n';
 
         for (int j=0;j<=2;j++){
+
+                std::cout << "x" << j+1<< ": " ;
             cin >> valor;
             aDL[i][j] = valor;
         }
+        std::cout << "  = " ;
+        cin >> valor;
+        aDL[i][3] = valor;
+
         cout <<"\n";
     }
 
@@ -197,17 +216,55 @@ void printValuesDL(){
     float cont;
     cout << "\nMatriz:\n";
 
-
+/*
      for (int i=0;i<=2;i++){
 
-
-        for (int j=0;j<=2;j++){
-            std::cout <<  aDL[i][j]<< ", ";
+        for (int j=0;j<=3;j++){
+            std::cout << aDL[i][j]<< ", ";
         }
+        cout <<"\n";
+    }*/
+
+    for (int i=0;i<=2;i++){
+
+
+    std::cout <<"("<< aDL[i][0]<< ")x1 + ("<< aDL[i][1]<< ")x2 + ("<< aDL[i][2]<< ")x3 = "<< aDL[i][3] ;
+
         cout <<"\n";
     }
 
+
     cout << "Presione cualquier tecla para continuar: \n";
     cin >> cont;
+
+}
+
+void insertValuesIt(){
+
+    system("cls");
+
+    float valor=0;
+
+    cout << "\n\nInserte coeficientes: \n";
+
+
+    for (int i=0;i<=2;i++){
+           std::cout << "(" << "Fila "<< i+1<< ")" << '\n';
+
+        for (int j=0;j<=2;j++){
+
+                std::cout << "x" << j+1<< ": " ;
+            cin >> valor;
+            aIt[i][j] = valor;
+        }
+        std::cout << "  = " ;
+        cin >> valor;
+        aIt[i][3] = valor;
+
+        cout <<"\n";
+    }
+}
+
+void printValuesIt(){
 
 }
