@@ -27,6 +27,7 @@ float aDL[3][4] =
 { 0, 0, 0, 0}, // row 1
 { 0, 0, 0, 0} // row 2
 };
+
 //MatrizTriangular
 float mT[3][4] =
 {
@@ -34,12 +35,30 @@ float mT[3][4] =
 { 0, 0, 0, 0}, // row 1
 { 0, 0, 0, 0} // row 2
 };
+
+float matrizL[3][3] =
+{
+{ 1, 0, 0}, // row 0
+{ 1, 1, 0}, // row 1
+{ 1, 1, 1} // row 2
+};
+
+float matrizU[3][3] =
+{
+{ 1, 1, 1}, // row 0
+{ 0, 1, 1}, // row 1
+{ 0, 0, 1} // row 2
+};
+
 void insertValuesDL();
 void printValuesDL();
 void resolvDL();
 void printValuesInput();
 void testFill();
 void printmT();
+void initMatrices();
+void printMatrizU();
+void printMatrizL();
 
 
 
@@ -137,9 +156,10 @@ int main() {
                                     //printValuesDL();
                                     testFill();
 
-                                    printValuesInput();
+                                    //printValuesInput();
                                     resolvDL();
-                                    printmT();
+                                    //printmT();
+                                    initMatrices();
 
 
                                         do{
@@ -160,6 +180,8 @@ int main() {
                                                 case 1:
                                                         system("cls");
                                                         cout<<"1. Matriz Principal"<<endl;
+                                                        printValuesInput();
+                                                        printmT();
                                                         system("pause");
                                                         system("cls");
                                                 break;
@@ -167,6 +189,8 @@ int main() {
                                                 case 2:
                                                         system("cls");
                                                         cout<<"2. Matriz Triangular Inferior"<<endl;
+                                                        printMatrizL();
+
                                                         system("pause");
                                                         system("cls");
                                                 break;
@@ -174,8 +198,10 @@ int main() {
                                                 case 3:
                                                         system("cls");
                                                         cout<<"3. Matriz Triangular Superior"<<endl;
+                                                        printMatrizU();
                                                         system("pause");
                                                         system("cls");
+
                                                 break;
 
                                                 case 4:
@@ -200,7 +226,12 @@ int main() {
 
 }
 
-//Acá se insertan los valores para la matriz de doolittle
+/*+++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CÓDIGO DOOLITTLE
++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++*/
 void insertValuesDL() {
 
             system("cls");
@@ -269,7 +300,6 @@ void insertValuesIt(){
         std::cout << "  = " ;
         cin >> valor;
         aIt[i][3] = valor;
-
         cout <<"\n";
     }
 }
@@ -284,7 +314,7 @@ void resolvDL(){
         mT[0][0]=aDL[0][0];
         mT[0][1]=aDL[0][1];
         mT[0][2]=aDL[0][2];
-        mT[0][3]=aDL[0][3];
+
 
     //Segunda fila
         mT[1][0]=aDL[1][0]/aDL[0][0];
@@ -295,25 +325,22 @@ void resolvDL(){
         mT[2][0]=aDL[2][0]/aDL[0][0];
         mT[2][1]=(aDL[2][1]-mT[2][0]*mT[0][1])/mT[1][1];
         mT[2][2]=aDL[2][2]-(mT[2][0]*mT[0][2])-(mT[2][1]*mT[1][2]);
-
-
-
 }
 
 void printmT(){
 
      float cont;
-            cout << "\nMatriz ingresada:\n";
+            cout << "\nMatriz factorizada:\n";
 
 
             for (int i=0;i<=2;i++){
 
-                    std::cout <<"("<< mT[i][0]<< ", "<< mT[i][1]<< ", "<< mT[i][2]<< ") = ("<<mT[i][3]<<")" ;
+                    std::cout <<"("<< mT[i][0]<< ", "<< mT[i][1]<< ", "<< mT[i][2]<< ") " ;
                         cout <<"\n";
             }
 
-            cout << "Presione cualquier tecla para continuar: \n";
-            cin >> cont;
+            cout << "\n";
+
 }
 
 void printValuesInput(){
@@ -328,8 +355,8 @@ void printValuesInput(){
                         cout <<"\n";
             }
 
-            cout << "Presione cualquier tecla para continuar: \n";
-            cin >> cont;
+            cout << "\n";
+
 }
 
 void testFill(){
@@ -352,6 +379,47 @@ void testFill(){
     aDL[2][2] = 17;
     aDL[2][3] = 31;
 
+}
+
+void initMatrices(){
+
+    //Matriz superior
+    for (int i=0;i<=2;i++){
+        for (int j=0;j<=2;j++){
+           matrizU[i][j] = matrizU[i][j]*mT[i][j];
+        }
+    }
+
+    //Matriz inferior
+    for (int i=0;i<=2;i++){
+        for (int j=0;j<=2;j++){
+           matrizL[i][j] = matrizL[i][j]*mT[i][j];
+        }
+
+    }
+
+        matrizL[0][0]=1;
+        matrizL[1][1]=1;
+        matrizL[2][2]=1;
+
+}
+
+void printMatrizU(){
+
+            cout << "\nMatriz triangular superior:\n";
+            for (int i=0;i<=2;i++){
+                    std::cout <<"("<< matrizU[i][0]<< ", "<< matrizU[i][1]<< ", "<< matrizU[i][2]<< ")" ;
+                        cout <<"\n";
+            }
+}
+
+void printMatrizL(){
+
+            cout << "\nMatriz triangular inferior:\n";
+            for (int i=0;i<=2;i++){
+                    std::cout <<"("<< matrizL[i][0]<< ", "<< matrizL[i][1]<< ", "<< matrizL[i][2]<< ")" ;
+                        cout <<"\n";
+            }
 }
 
 
