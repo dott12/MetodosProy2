@@ -13,13 +13,16 @@ float aIt[3][4] =
 { 0, 0, 0, 0} // row 2
 };
 
+float xDL[3];
+float yDL[3];
+
 void insertValuesIt();
 void printValuesIt();
 
 
 
 
-//****Variables Doolittle
+//***********************************************Variables Doolittle
 float aDL[3][4] =
 //arrayDooLittle
 {
@@ -59,6 +62,9 @@ void printmT();
 void initMatrices();
 void printMatrizU();
 void printMatrizL();
+void findXnY();
+void printXYdl();
+void testFill2();
 
 
 
@@ -152,14 +158,16 @@ int main() {
 
                                 case 2:
 
-                                    //insertValuesDL(); //llama al método para insertar los valores de la matriz
+                                    insertValuesDL(); //llama al método para insertar los valores de la matriz
                                     //printValuesDL();
-                                    testFill();
+                                    //testFill();
+                                    //testFill2();
 
                                     //printValuesInput();
                                     resolvDL();
                                     //printmT();
                                     initMatrices();
+                                    findXnY();
 
 
                                         do{
@@ -207,6 +215,7 @@ int main() {
                                                 case 4:
                                                         system("cls");
                                                         cout<<"4. Resultado del Sistema de Ecuaciones Algebraico Lineal"<<endl;
+                                                        printXYdl();
                                                         system("pause");
                                                         system("cls");
                                                 break;
@@ -310,6 +319,8 @@ void printValuesIt(){
 
 void resolvDL(){
 
+
+
     //Primera fila
         mT[0][0]=aDL[0][0];
         mT[0][1]=aDL[0][1];
@@ -325,6 +336,7 @@ void resolvDL(){
         mT[2][0]=aDL[2][0]/aDL[0][0];
         mT[2][1]=(aDL[2][1]-mT[2][0]*mT[0][1])/mT[1][1];
         mT[2][2]=aDL[2][2]-(mT[2][0]*mT[0][2])-(mT[2][1]*mT[1][2]);
+
 }
 
 void printmT(){
@@ -381,6 +393,27 @@ void testFill(){
 
 }
 
+void testFill2(){
+    //llena fila 1
+    aDL[0][0] = 2;
+    aDL[0][1] = -1;
+    aDL[0][2] = -2;
+    aDL[0][3] = -1;
+
+    //llena fila 2
+    aDL[1][0] = -4;
+    aDL[1][1] = 6;
+    aDL[1][2] = 3;
+    aDL[1][3] = 13;
+
+    //llena fila 3
+    aDL[2][0] = -4;
+    aDL[2][1] = -2;
+    aDL[2][2] = 8;
+    aDL[2][3] = -6;
+
+}
+
 void initMatrices(){
 
     //Matriz superior
@@ -422,5 +455,26 @@ void printMatrizL(){
             }
 }
 
+void findXnY(){
+    yDL[0]=aDL[0][3]/matrizL[0][0];
+    yDL[1]=aDL[1][3]+(-1*matrizL[1][0]*yDL[0])/matrizL[1][1];
+    yDL[2]=aDL[2][3]+(-1*matrizL[2][0]*yDL[0])+(-1*matrizL[2][1]*yDL[1])/matrizL[2][2];
+
+    xDL[2]=matrizU[2][2]/yDL[2];
+    xDL[1]=(yDL[1]-(xDL[2]*matrizU[1][2]))/matrizU[1][1];
+    xDL[0]=(yDL[0]-(xDL[1]*matrizU[0][1])-(matrizU[0][2]*xDL[2]))/matrizU[0][0];
+}
+
+void printXYdl(){
+    std::cout <<"y1 = "<< yDL[0]<< "\n";
+    std::cout <<"y2 = "<< yDL[1]<< "\n";
+    std::cout <<"y3 = "<< yDL[2]<< "\n";
+
+    cout <<"\n\n";
+
+    std::cout <<"x1 = "<< xDL[0]<< "\n";
+    std::cout <<"x2 = "<< xDL[1]<< "\n";
+    std::cout <<"x3 = "<< xDL[2]<< "\n";
+}
 
 
