@@ -22,7 +22,7 @@ void printValuesIt();
 
 
 
-//***********************************************Variables Doolittle
+//***********************************************Variables Doolittle - Inicio
 float aDL[3][4] =
 //arrayDooLittle
 {
@@ -65,6 +65,8 @@ void printMatrizL();
 void findXnY();
 void printXYdl();
 void testFill2();
+
+//***********************************************Variables Doolittle - Fin
 
 
 
@@ -235,58 +237,7 @@ int main() {
 
 }
 
-/*+++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CÓDIGO DOOLITTLE
-+++++++++++++++++++++++++++
-++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++*/
-void insertValuesDL() {
-
-            system("cls");
-
-            float valor=0;
-
-            cout << "\n\nInserte valores: \n";
-
-
-                for (int i=0;i<=2;i++){
-                   std::cout << "(" << "Fila "<< i+1<< ")" << '\n';
-
-                for (int j=0;j<=2;j++){
-
-                        std::cout << "x" << j+1<< ": " ;
-                    cin >> valor;
-                    aDL[i][j] = valor;
-                }
-                std::cout << "  = " ;
-                cin >> valor;
-                aDL[i][3] = valor;
-
-                cout <<"\n";
-            }
-
-
-
-
-}
-
-void printValuesDL(){
-
-            float cont;
-            cout << "\nSistema de ecuaciones:\n";
-
-
-            for (int i=0;i<=2;i++){
-
-                    std::cout <<"("<< aDL[i][0]<< ")x1 + ("<< aDL[i][1]<< ")x2 + ("<< aDL[i][2]<< ")x3 = "<< aDL[i][3] ;
-                        cout <<"\n";
-            }
-
-            cout << "Presione cualquier tecla para continuar: \n";
-            cin >> cont;
-
-}
+//++++++++++++++++++++++++++++++++++METODOS PARA ITERACIÓN (OPCIONAL USARLOS)
 
 void insertValuesIt(){
 
@@ -317,9 +268,67 @@ void printValuesIt(){
 
 }
 
+/*+++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CÓDIGO DOOLITTLE
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Inicio
++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++*/
+
+//Inserción de valores en la matriz de Doolittle
+void insertValuesDL() {
+
+            system("cls");
+
+            float valor=0;
+
+            cout << "\n\nInserte valores: \n";
+
+
+                for (int i=0;i<=2;i++){
+                   std::cout << "(" << "Fila "<< i+1<< ")" << '\n';
+
+                for (int j=0;j<=2;j++){
+
+                        std::cout << "x" << j+1<< ": " ;
+                    cin >> valor;
+                    aDL[i][j] = valor;
+                }
+                std::cout << "  = " ;
+                cin >> valor;
+                aDL[i][3] = valor;
+
+                cout <<"\n";
+            }
+
+
+
+
+}
+
+//Imprime los valores que el usuario ingresó en formato de sistema de ecuaciones
+void printValuesDL(){
+
+            float cont;
+            cout << "\nSistema de ecuaciones:\n";
+
+
+            for (int i=0;i<=2;i++){
+
+                    std::cout <<"("<< aDL[i][0]<< ")x1 + ("<< aDL[i][1]<< ")x2 + ("<< aDL[i][2]<< ")x3 = "<< aDL[i][3] ;
+                        cout <<"\n";
+            }
+
+            cout << "Presione cualquier tecla para continuar: \n";
+            cin >> cont;
+
+}
+
+
+
+//Método que factoriza la matriz
 void resolvDL(){
-
-
 
     //Primera fila
         mT[0][0]=aDL[0][0];
@@ -339,6 +348,8 @@ void resolvDL(){
 
 }
 
+
+//Imprime los valores de la matriz factorizada
 void printmT(){
 
      float cont;
@@ -355,6 +366,8 @@ void printmT(){
 
 }
 
+
+//Imprime los valores que el usuario ingresó en forma de matriz con paréntesis
 void printValuesInput(){
 
             float cont;
@@ -371,6 +384,7 @@ void printValuesInput(){
 
 }
 
+//Valores de prueba 1
 void testFill(){
 
     //llena fila 1
@@ -393,6 +407,7 @@ void testFill(){
 
 }
 
+//Valores de prueba 2
 void testFill2(){
     //llena fila 1
     aDL[0][0] = 2;
@@ -414,6 +429,7 @@ void testFill2(){
 
 }
 
+//Inicializa las matrices triangulares superior e inferior
 void initMatrices(){
 
     //Matriz superior
@@ -437,6 +453,7 @@ void initMatrices(){
 
 }
 
+//Imprime la matriz triangular superior
 void printMatrizU(){
 
             cout << "\nMatriz triangular superior:\n";
@@ -446,6 +463,7 @@ void printMatrizU(){
             }
 }
 
+//Imprime la matriz triangular inferior
 void printMatrizL(){
 
             cout << "\nMatriz triangular inferior:\n";
@@ -455,6 +473,7 @@ void printMatrizL(){
             }
 }
 
+//Metodos para encontrar x y y al final del procedimiento
 void findXnY(){
     yDL[0]=aDL[0][3]/matrizL[0][0];
     yDL[1]=aDL[1][3]+(-1*matrizL[1][0]*yDL[0])/matrizL[1][1];
@@ -465,16 +484,28 @@ void findXnY(){
     xDL[0]=(yDL[0]-(xDL[1]*matrizU[0][1])-(matrizU[0][2]*xDL[2]))/matrizU[0][0];
 }
 
+//Imprimir valores de x y y al final del procedimiento
 void printXYdl(){
+     cout <<"\n";
+      cout <<"\n";
     std::cout <<"y1 = "<< yDL[0]<< "\n";
     std::cout <<"y2 = "<< yDL[1]<< "\n";
     std::cout <<"y3 = "<< yDL[2]<< "\n";
 
-    cout <<"\n\n";
+    cout <<"\n";
 
     std::cout <<"x1 = "<< xDL[0]<< "\n";
     std::cout <<"x2 = "<< xDL[1]<< "\n";
     std::cout <<"x3 = "<< xDL[2]<< "\n";
 }
+
+
+/*+++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CÓDIGO DOOLITTLE
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++FIN
++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++*/
 
 
