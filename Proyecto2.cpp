@@ -1,6 +1,8 @@
 #include<iostream>
 #include<conio.h>
 #include<stdlib.h>
+#include<iomanip>
+#include<cmath>
 using namespace std;
 
 
@@ -119,42 +121,110 @@ int main() {
                             cout<<"Elija la opcion que desea:"<<endl;
                             cin>>menu2;
                             system("cls");
+switch(menu2){
+						case 1:{
+    						int n,i,j,k,flag=0,interac=0;
+    						double x2[n];
+							 	do{
+									system("cls");
+									cout<<"\tMETODO ITERATIVO"<<endl<<endl;
+									cout<<"1. Tabla o cuadro de iteraciones"<<endl;
+									cout<<"2. Resultado del Sistema de Ecuaciones Algebraico lineal"<<endl;
+									cout<<"3. Regresar al Menu anterior"<<endl<<endl;
+									cout<<"Eliga la opcion que desea:"<<endl;
+									cin>>menu3;
+									system("cls");
+										switch(menu3){
+										case 1:{
+											cout<<"\tSe realizara el metodo GAUSS SEIDEL"<<endl;
+											cout<<"\nIngrese el numero de ecuaciones\n";           
+    										cin>>n;
+    										double matriz[n][n+1];       //matriz para los coeficientes
+    										double x[n];                //arreglo para los valores de x1 x2 x3
+    										double eps=0.00001,y,error;
+    										
+   											cout<<"\nIngrese los coeficientes a la matriz:\n";
+    										for (i=0;i<n;i++){
+												for (j=0;j<=n;j++){
+													cout<<"["<<i<<"]"<<"["<<j<<"]"<<":";
+													cin>>matriz[i][j];
+            									}
+            								}
+            								
+            								cout<<"\nSu matriz de coeficientes es:\n";
+    										for (i=0;i<n;i++){
+												for (j=0;j<=n;j++){
+													cout<<matriz[i][j]<<"\t\t";
+            									}
+            									cout<<endl;
+            								}
+    										cout<<"\nIngrese los valores iniciales de x0,x1,x2:\n";
+    										for (i=0;i<n;i++){
+											cout<<"X"<<i<<":";
+       										cin>>x[i];
+    										}
+											for (i=0;i<n;i++)                    //Pivotizacion parcial para hacer la matriz dominante
+        										for (k=i+1;k<n;k++)
+            										if (abs(matriz[i][i])<abs(matriz[k][i]))
+                										for (j=0;j<=n;j++)
+                										{
+                    										double temp=matriz[i][j];
+                    										matriz[i][j]=matriz[k][j];
+                    										matriz[k][j]=temp;
+                										}
+                							cout.precision(4);
+    										cout.setf(ios::fixed);
+    										cout<<"Iter"<<setw(10);
+    										for(i=0;i<n;i++)
+        									cout<<"x"<<i<<setw(18);
+        									cout<<"Error";
+    										cout<<"\n-----------------------------------------------------------------------------";
+    										cout<<endl;
+    										do                            
+    											{
+        											cout<<"\n"<<interac+1<<setw(16);
+        											for (i=0;i<n;i++)       //Ciclo para calcular los valores de x1,x2,x3
+        											{
+            											y=x[i];
+            											x[i]=matriz[i][n];
+            											for (j=0;j<n;j++)
+            											{
+                											if (j!=i)
+                											x[i]=x[i]-matriz[i][j]*x[j];
+            											}
+            											x[i]=x[i]/matriz[i][i];
+            											if (abs(x[i]-y)<=eps)   //  Compara el valor nuevo con el anterior
+                										flag++;
+            											cout<<x[i]<<setw(18);
+            											error=abs(x[i]-y);
+            											x2[i]=x[i];
+        											}
+        											cout<<error;
+        											cout<<"\n";
+        											interac++;   		
+    											}while(flag<n);  //Si el valor de todas las variables no difiere de sus valores previos con un error mayor a eps la bandera sera n y detendra el loop.   
+   
+    											cout<<"\nLas soluciones son:\n";
+    											for (i=0;i<n;i++)
+        										cout<<"x"<<i<<" = "<<x[i]<<endl;
+        										system("pause");
+												system("cls");
 
-
-                                switch(menu2){
-                                case 1:
-
-                                    insertValuesIt();
-                                        do{
-                                            system("cls");
-                                            cout<<"\tMETODO ITERATIVO"<<endl<<endl;
-                                            cout<<"1. Tabla o cuadro de iteraciones"<<endl;
-                                            cout<<"2. Resultado del Sistema de Ecuaciones Algebraico lineal"<<endl;
-                                            cout<<"3. Regresar al Menu anterior"<<endl<<endl;
-                                            cout<<"Elija la opcion que desea:"<<endl;
-                                            cin>>menu3;
-                                            system("cls");
-
-                                            //D
-                                                switch(menu3){
-                                                case 1:
-                                                        system("cls");
-                                                        cout<<"1. Tabla o cuadro de iteraciones"<<endl;
-                                                        system("pause");
-                                                        system("cls");
-
-                                                break;
-
-                                                case 2:
-                                                        system("cls");
-                                                        cout<<"2. Resultado del Sistema de Ecuaciones Algebraico lineal"<<endl;
-                                                        system("pause");
-                                                        system("cls");
-                                                        break;
-
-                                                }
-                                        }while(menu3!=3);
-                                break;
+										break;
+										}	
+										case 2:{
+												system("cls");
+												cout<<"2. Resultado del Sistema de Ecuaciones Algebraico lineal"<<endl;
+												for (i=0;i<n;i++)
+        										cout<<"x"<<i<<" = "<<x2[i]<<endl;
+												system("pause");
+												system("cls");
+										break;
+										}
+										}
+								}while(menu3!=3);
+						break;
+						}
 
         //+++++++++++++++++++++++Método Doolittle++++++++++++++++++++++++++++++++
 
